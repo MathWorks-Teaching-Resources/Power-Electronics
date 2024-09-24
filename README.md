@@ -5,7 +5,7 @@
 <a name="H_053613DF"></a>
 
 
-[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/XXXXX-power-electronics) or [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj)
+[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/173035-power-electronics) or [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=README.mlx)
 
 ![MATLAB Versions Tested](https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2FMathWorks-Teaching-Resources%2FPower-Electronics%2Frelease%2FImages%2FTestedWith.json)
 
@@ -42,7 +42,7 @@ This module assumes knowledge of basic circuit theory. There is minimal MATLAB k
 ### Accessing the Module
 ### **On MATLAB Online:**
 
-Use the [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj) link to download the module. You will be prompted to log in or create a MathWorks account. The project will be loaded, and you will see an app with several navigation options to get you started.
+Use the [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=README.mlx) link to download the module. You will be prompted to log in or create a MathWorks account. The project will be loaded, and you will see an app with several navigation options to get you started.
 
 ### **On Desktop:**
 
@@ -61,7 +61,7 @@ Ensure you have all the required products ([listed below](#H_E850B4FF)) installe
 
 # Scripts
 
- *If you are viewing this in a version of MATLAB prior to R2023b, you can view the learning outcomes for each script* [*here*](https://www.mathworks.com/matlabcentral/fileexchange/XXXXX-power-electronics)
+ *If you are viewing this in a version of MATLAB prior to R2023b, you can view the learning outcomes for each script* [*here*](https://www.mathworks.com/matlabcentral/fileexchange/173035-power-electronics)
 
 <a name="H_71C19DD4"></a>
 
@@ -96,14 +96,17 @@ The license for this module is available in the [LICENSE.md](https://github.com/
 <a name="H_868F5748"></a>
 
 ## [DC Circuit Analysis](https://www.mathworks.com/matlabcentral/fileexchange/103375-dc-circuit-analysis?s_tid=srchtitle)
-| <img src="Images/image_6.png" width="200" alt="image_6.png"> <br>  | **Available on:** <br> [<img src="Images/OpenInFX.png" width="91" alt="OpenInFX.png">](https://www.mathworks.com/matlabcentral/fileexchange/103375-dc-circuit-analysis?s_tid=srchtitle)  <br> [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/DC-Circuit-Analysis&project=DCCircuitAnalysis.prj)  <br> [GitHub](https://github.com/MathWorks-Teaching-Resources/DC-Circuit-Analysis)  <br>   |
+| <img src="Images/image_6.png" width="200" alt="image_6.png"> <br>  | **Available on:** <br> [<img src="Images/OpenInFX.png" width="91" alt="OpenInFX.png">](https://www.mathworks.com/matlabcentral/fileexchange/103375-dc-circuit-analysis?s_tid=srchtitle)  <br> [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/DC-Circuit-Analysis&project=DCCircuitAnalysis.prj&file=README.mlx)  <br> [GitHub](https://github.com/MathWorks-Teaching-Resources/DC-Circuit-Analysis)  <br>   |
 | :-- | :-- |
 
+## [Battery Systems: introduction](https://www.mathworks.com/matlabcentral/fileexchange/172770-battery-systems-introduction?s_tid=srchtitle)
+| <img src="Images/scooter.png" width="200" alt="scooter.png"> <br>  | **Available on:** <br> [<img src="Images/OpenInFX.png" width="91" alt="OpenInFX.png">](https://www.mathworks.com/matlabcentral/fileexchange/172770-battery-systems-introduction?s_tid=srchtitle)  <br> [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Battery-Systems&project=BatterySystem.prj&file=README.mlx)  <br> [GitHub](https://github.com/MathWorks-Teaching-Resources/Battery-Systems)  <br>   |
+| :-- | :-- |
 
 Feel free to explore our other [modular courseware content](https://www.mathworks.com/matlabcentral/fileexchange/?q=tag%3A%22courseware+module%22&sort=downloads_desc_30d).
 
 # Educator Resources
--  [Educator Page](https://www.mathworks.com/academia/educators.html) 
+-  [Educator Page](https://www.mathworks.com/academia/educators.html)
 
 <a name="H_0FA5DA18"></a>
 
