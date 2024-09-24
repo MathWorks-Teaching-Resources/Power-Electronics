@@ -15,7 +15,7 @@ _Created with R2024a. Compatible with R2024a and later releases._
 
 # Information
 
-This curriculum module contains interactive [MATLAB® live scripts](https://www.mathworks.com/products/matlab/live-editor.html), [Simulink](https://www.mathworks.com/products/simulink.html), and [Simscape™](https://www.mathworks.com/products/simscape.html) models that teach the fundamental components of power electronics.
+This curriculum module contains interactive [MATLAB® live scripts](https://www.mathworks.com/products/matlab/live-editor.html), [Simulink®](https://www.mathworks.com/products/simulink.html), and [Simscape™](https://www.mathworks.com/products/simscape.html) models that teach the fundamental components of power electronics.
 
 <a name="H_F00D98E4"></a>
 
