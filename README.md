@@ -108,6 +108,11 @@ Feel free to explore our other [modular courseware content](https://www.mathwork
 # Educator Resources
 -  [Educator Page](https://www.mathworks.com/academia/educators.html)
 
+<a name="H_F10FBF7B"></a>
+# Acknowledgments
+
+A special thanks to Stefan Kerber and Graham Dudgeon (both of The MathWorks, Inc.) for contributing to the development of these interactive educational power electronics modules.
+
 <a name="H_0FA5DA18"></a>
 
 # Contribute 
