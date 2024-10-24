@@ -8,6 +8,12 @@ on:
     branches: [ release ]
   workflow_dispatch:
 
+# Add permission to write GitHub pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   test:
     strategy: 
@@ -17,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       # Sets up a display server
       - name: Start display server
@@ -32,7 +38,15 @@ jobs:
         uses: matlab-actions/setup-matlab@v2
         with:
           release: ${{ matrix.MATLABVersion }}
-          products: Simulink Simscape Simscape_Electrical Simscape_Battery 
+          products: MATLAB Simulink Simscape Simscape_Battery Simscape_Electrical
+          # List required products above in the format shown (and uncomment them)
+          # List of product strings:
+          # Simulink
+          # Statistics_and_Machine_Learning_Toolbox
+          # Simulink_Coder
+          # Econometrics_Toolbox
+          # Deep_Learning_Toolbox
+
 
       # Run all the tests
       - name: Run SmokeTests
@@ -42,10 +56,12 @@ jobs:
 
       # Upload the test results as artifact
       - name: Upload TestResults
+        if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
-          name: TestResults
-          path: ./SoftwareTests/TestResults_${{ matrix.MATLABVersion }}.txt
+          name: TestResults_${{ matrix.MATLABVersion }}
+          path: ./public/*
+          overwrite: true
 
   badge:
     if: ${{ always() }}
@@ -56,9 +72,9 @@ jobs:
     steps: 
 
       # Checks-out your repository
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
-      # Sets up R2024b
+      # Sets up R2023b
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v2
         with:
@@ -68,15 +84,26 @@ jobs:
       - name: Download All TestResults
         uses: actions/download-artifact@v4
         with:
-          path: SoftwareTests
+          path: public
           pattern: TestResults_*
           merge-multiple: true
-
+          
       # Create the test results badge
-      - name: Run CreateBadge
-        uses: matlab-actions/run-command@v1
+      - name: Run PostSmokeTest
+        uses: matlab-actions/run-command@v2
         with:
-          command: openProject(pwd); CreateBadge;
+          command: openProject(pwd); PostSmokeTest;
+      
+      # Deploy reports to GitHub pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       # Commit the JSON for the MATLAB releases badge 
       - name: Commit changed files
