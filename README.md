@@ -114,6 +114,9 @@ Feel free to explore our other [modular courseware content](https://www.mathwork
 
 Looking for more? Find an issue? Have a suggestion? Please contact the [MathWorks teaching resources team](mailto:%20onlineteaching@mathworks.com). If you want to contribute directly to this project, you can find information about how to do so in the [CONTRIBUTING.md](https://github.com/MathWorks-Teaching-Resources/Power-Electronics/blob/release/CONTRIBUTING.md) page on GitHub.
 
+# Credits
+
+A special thanks to Mohsen Aleenejad and Graham Dudgeon (both of The MathWorks, Inc.) for contributing Simlunk models and examples used to build these interactive educational power electronics modules.
 
  *©* Copyright 2024 The MathWorks™, Inc
 
