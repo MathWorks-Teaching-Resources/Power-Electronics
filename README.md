@@ -28,7 +28,7 @@ The instructions inside the live scripts will guide you through the exercises an
 
 ## Contact Us
 
-Solutions are available upon instructor request. Contact the [MathWorks teaching resources team](mailto:onlineteaching@mathworks.com) if you would like to request solutions, provide feedback, or if you have a question.
+Contact the [MathWorks Educator Content Development Team](mailto:onlineteaching@mathworks.com) if you would like to provide feedback, or if you have a question.
 
 <a name="H_30BC7141"></a>
 
@@ -61,25 +61,23 @@ Ensure you have all the required products ([listed below](#H_E850B4FF)) installe
 
 # Scripts
 
- *If you are viewing this in a version of MATLAB prior to R2023b, you can view the learning outcomes for each script* [*here*](https://www.mathworks.com/matlabcentral/fileexchange/173035-power-electronics)
-
 <a name="H_71C19DD4"></a>
 
-## [**Rectifiers.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Rectifiers.mlx)
+## [**Rectifiers.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Rectifiers.mlx)
 |  | **In this script, students will...** <br>  | **Academic disciplines** <br>   |
 | :-- | :-- | :-- |
 | <img src="Images/SmartphoneCharging.png" width="200" alt="SmartphoneCharging.png"> <br>  | • Learn about the types of rectifiers (AC\-DC) <br> • Review the theory of rectifier functionality <br> • Simulate behavior of different rectifier models <br> • Apply rectifier theory to charging a mobile phone <br>  | • Electrical Engineering <br>   |
 
 <a name="H_F12D54E8"></a>
 
-## [**Converters.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Converters.mlx)
+## [**Converters.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Converters.mlx)
 |  | **In this script, students will...** <br>  | **Academic disciplines** <br>   |
 | :-- | :-- | :-- |
 | <img src="Images/EV.jpg" width="300" alt="EV.jpg"> <br>  | • Learn about the types of DC\-DC converters <br> • Review the theory of DC\-DC converter functionality <br> • Simulate behavior of different converter models <br> • Apply converter theory to distributing power in an electric vehicle <br>  | • Electrical Engineering <br>   |
 
 <a name="H_E2F6B1CD"></a>
 
-## [**Inverters.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Inverters.mlx)
+## [**Inverters.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Inverters.mlx)
 |  | **In this script, students will...** <br>  | **Academic disciplines** <br>   |
 | :-- | :-- | :-- |
 | <img src="Images/SolarStation.jpg" width="300" alt="SolarStation.jpg"> <br>  | • Learn about the types of inverters (DC\-AC) <br> • Review the theory of inverter functionality <br> • Simulate behavior of different inverter models <br> • Apply inverter theory to converting electricity from solar panels <br>  | • Electrical Engineering <br>   |
@@ -112,13 +110,13 @@ Feel free to explore our other [modular courseware content](https://www.mathwork
 
 # Contribute 
 
-Looking for more? Find an issue? Have a suggestion? Please contact the [MathWorks teaching resources team](mailto:%20onlineteaching@mathworks.com). If you want to contribute directly to this project, you can find information about how to do so in the [CONTRIBUTING.md](https://github.com/MathWorks-Teaching-Resources/Power-Electronics/blob/release/CONTRIBUTING.md) page on GitHub.
+Looking for more? Find an issue? Have a suggestion? Please contact the [MathWorks Educator Content Development Team](mailto:%20onlineteaching@mathworks.com). If you want to contribute directly to this project, you can find information about how to do so in the [CONTRIBUTING.md](https://github.com/MathWorks-Teaching-Resources/Power-Electronics/blob/release/CONTRIBUTING.md) page on GitHub.
 
 # Credits
 
 A special thanks to Mohsen Aleenejad and Graham Dudgeon (both of The MathWorks, Inc.) for contributing Simlunk models and examples used to build these interactive educational power electronics modules.
 
- *©* Copyright 2024 The MathWorks™, Inc
+ *©* Copyright 2025 The MathWorks, Inc
 
 
 
