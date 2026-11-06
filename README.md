@@ -5,13 +5,13 @@
 <a name="H_053613DF"></a>
 
 
-[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/173035-power-electronics) or [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=README.mlx)
+[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/173035-power-electronics) or [![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=README.m)
 
 [![MATLAB Versions Tested](https://img.shields.io/endpoint?url=https://mathworks-teaching-resources.github.io/Power-Electronics/TestedWith.json)](https://MathWorks-Teaching-Resources.github.io/Power-Electronics)
 
 **Curriculum Module**
 
-_Created with R2024a. Compatible with R2024a and later releases._
+_Plain-text live scripts require MATLAB R2025a or newer. For MATLAB R2024b or older, use the [legacy MLX version](https://github.com/MathWorks-Teaching-Resources/Power-Electronics/releases/tag/mlx)._
 
 # Information
 
@@ -42,7 +42,7 @@ This module assumes knowledge of basic circuit theory. There is minimal MATLAB k
 ### Accessing the Module
 ### **On MATLAB Online:**
 
-Use the [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=README.mlx) link to download the module. You will be prompted to log in or create a MathWorks account. The project will be loaded, and you will see an app with several navigation options to get you started.
+Use the [<img src="Images/OpenInMO.png" width="136" alt="OpenInMO.png">](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=README.m) link to download the module. You will be prompted to log in or create a MathWorks account. The project will be loaded, and you will see an app with several navigation options to get you started.
 
 ### **On Desktop:**
 
@@ -63,21 +63,21 @@ Ensure you have all the required products ([listed below](#H_E850B4FF)) installe
 
 <a name="H_71C19DD4"></a>
 
-## [**Rectifiers.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Rectifiers.mlx)
+## [**Rectifiers.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Rectifiers.m)
 |  | **In this script, students will...** <br>  | **Academic disciplines** <br>   |
 | :-- | :-- | :-- |
 | <img src="Images/SmartphoneCharging.png" width="200" alt="SmartphoneCharging.png"> <br>  | • Learn about the types of rectifiers (AC\-DC) <br> • Review the theory of rectifier functionality <br> • Simulate behavior of different rectifier models <br> • Apply rectifier theory to charging a mobile phone <br>  | • Electrical Engineering <br>   |
 
 <a name="H_F12D54E8"></a>
 
-## [**Converters.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Converters.mlx)
+## [**Converters.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Converters.m)
 |  | **In this script, students will...** <br>  | **Academic disciplines** <br>   |
 | :-- | :-- | :-- |
 | <img src="Images/EV.jpg" width="300" alt="EV.jpg"> <br>  | • Learn about the types of DC\-DC converters <br> • Review the theory of DC\-DC converter functionality <br> • Simulate behavior of different converter models <br> • Apply converter theory to distributing power in an electric vehicle <br>  | • Electrical Engineering <br>   |
 
 <a name="H_E2F6B1CD"></a>
 
-## [**Inverters.mlx**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Inverters.mlx)
+## [**Inverters.m**](https://matlab.mathworks.com/open/github/v1?repo=MathWorks-Teaching-Resources/Power-Electronics&project=PowerElectronics.prj&file=Scripts/Inverters.m)
 |  | **In this script, students will...** <br>  | **Academic disciplines** <br>   |
 | :-- | :-- | :-- |
 | <img src="Images/SolarStation.jpg" width="300" alt="SolarStation.jpg"> <br>  | • Learn about the types of inverters (DC\-AC) <br> • Review the theory of inverter functionality <br> • Simulate behavior of different inverter models <br> • Apply inverter theory to converting electricity from solar panels <br>  | • Electrical Engineering <br>   |
@@ -116,7 +116,7 @@ Looking for more? Find an issue? Have a suggestion? Please contact the [MathWork
 
 A special thanks to Mohsen Aleenejad and Graham Dudgeon (both of The MathWorks, Inc.) for contributing Simlunk models and examples used to build these interactive educational power electronics modules.
 
- *©* Copyright 2025 The MathWorks, Inc
+ *©* Copyright 2026 The MathWorks, Inc
 
 
 
