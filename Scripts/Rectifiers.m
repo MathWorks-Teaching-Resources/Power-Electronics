@@ -105,18 +105,22 @@ open_system("Models/SmartphoneBatteryRectifierModel.slx")
 exerciseSol2("No Selection") %[control:dropdown:4dbb]{"position":[14,28]}
   %[control:button:3b51]{"position":[1,2]}
 %%
-%[text] ![](text:image:80c5) **Exercise 3.** Begin by simulating the open model. Using the [scope](https://www.mathworks.com/help/simulink/slref/scope.html) block labeled as "Results", what is the total power (in Watts) that is being consumed in the charging of the smartphone battery?
+%[text] ![](text:image:80c5) **Exercise 3.** Begin by simulating the open model. Using the [scope](https://www.mathworks.com/help/simulink/slref/scope.html) block labeled as "Results", what is the approximate peak instantaneous power (in Watts) delivered to the smartphone battery?
   %[control:button:714c]{"position":[1,2]}
 
 % Simulate Simscape model for the smartphone battery rectifier
-set_param('SmartphoneBatteryRectifierModel',"StopTime","0.1");
-sim("Models/SmartphoneBatteryRectifierModel.slx","StopTime","0.1");
+rectifierInput = Simulink.SimulationInput("SmartphoneBatteryRectifierModel");
+rectifierInput = rectifierInput.setModelParameter("StopTime","0.1");
+rectifierInput = rectifierInput.setBlockParameter( ...
+    Simulink.ID.getFullName("SmartphoneBatteryRectifierModel:9"),"DataLogging","on");
+rectifierData = sim(rectifierInput);
 disp("The total simulation time elapsed for exercise 3 is 0.1 seconds.")
 %[text] ![](text:image:44fb) **Note.** Recall that power is calculated by the following equation: $P = V \* I${"altText":"P = V times I"}, where V is the voltage and I is the current. 
 %%
-%[text] Analyze the first two plots labeled as "Current" and "Voltage" in the scope. Use the zoom Y tool ![Zoom Y icon](text:image:3e99) in the scope toolstrip to <u>**estimate**</u> the peak values for voltage and current. If the plot is not scaled upon opening the scope, use the Scale X and Y Axes Limits tool ![Scale Axes icon](text:image:6ab3).
+%[text] Analyze the first two plots labeled as "Current" and "Voltage" in the scope. Use the zoom Y tool ![Zoom Y icon](text:image:3e99) in the scope toolstrip to locate the current peak. Use cursor measurements to <u>**estimate**</u> the current and voltage at that same time, then multiply those readings to estimate the peak charging power. If the plot is not scaled upon opening the scope, use the Scale X and Y Axes Limits tool ![Scale Axes icon](text:image:6ab3).
 power = 0; %[control:editfield:7d72]{"position":[9,10]}
-exerciseSol3(power);
+rectifierPowerFeedback = @exerciseSol3;
+rectifierPowerFeedback(power);
 %%
 %[text] ![](text:image:48ab) **Exercise 4.** Simulate the open model again. Using the scope block labeled "Results", determine the amount of time (in hours) that it will take to fully charge (100%) the smartphone battery from its current state of charge, 25%.
   %[control:button:7f76]{"position":[1,2]}
@@ -235,19 +239,22 @@ function exerciseSol2(subs)
     end
 end
 
-function exerciseSol3(power)
+function correct = exerciseSol3(power)
     % Provides solution for Exercise 3
     arguments
         power (1,1) double
     end
 
-    errMargin = 1; % Watts
-    if power >= (326 - errMargin) && power <= (326 + errMargin)
-        disp("Correct! You have properly calculated the total power consumed.")
+    referencePower = 320; % W
+    tolerance = 5; % W; allow for estimating Scope readings
+    correct = isreal(power) && isfinite(power) && ...
+        abs(power-referencePower) <= tolerance;
+    if correct
+        disp("Correct! You have estimated the peak charging power.")
     elseif power == 0
         disp("Please enter your answer.")
     else
-        warning("Your answer has exceeded the tolerance of the possible solutions. Please measure the peaks of the signals and try again.")
+        warning("Your answer has exceeded the tolerance of the possible solutions. Please read current and voltage at the same time near the current peak and try again.")
     end
 end
 

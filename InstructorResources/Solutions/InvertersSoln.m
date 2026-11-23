@@ -197,17 +197,19 @@ exerciseSol3(selection);
 % Open Simscape model for the solar power inverter model
 open_system("Models/SolarPowerInverterModel.slx")
 
-% Suppress buffer size warning
-id = 'Simulink:blocks:TDelayBufferTooSmall';
-warning('off',id);
+
 %%
-%[text] Before simulation, set the initial duty cycle percentage knob in the model to 75% (0.75). <u>**Estimate**</u> the maximum power that can be achieved with this panel at a given irradiance of 1000 W/m^2 and a panel output voltage of 25 VDC. You can simulate the model using the run icon ![Simulink Run icon.](text:image:6ada) in the model toolstrip. Utilize the Power vs. Voltage figure that appears post-simulation to determine the max power.
-maxPower = 251.51; % Maximum Power (W) %[control:editfield:1675]{"position":[12,18]}
-exerciseSol4(maxPower);
+%[text] Before simulation, set the initial duty cycle knob to **75% (0.75)**. For these exercises, the model holds irradiance at **1000 W/m^2**, panel temperature at **30 degC**, and runs for **2 seconds**. Run the model using the run icon ![Simulink Run icon.](text:image:6ada). The green marker shows panel voltage and panel power averaged over the most recent 0.2 seconds to reduce ripple. From the **1000 W/m^2 curve**, <u>**estimate the panel power at 25 VDC**</u>. This is the power at the specified voltage; the peak of the curve identifies the maximum available power.
+panelPower = 253.59; % Panel Power (W) %[control:editfield:1675]{"position":[14,20]}
+solarPowerFeedback = @exerciseSol4;
+solarPowerFeedback(panelPower);
 %%
-%[text] ![](text:image:6247) **Exercise 5.** Given the initial MPPT duty cycle of 75% provided in the previous exercise, <u>**estimate**</u> the final output voltage from the solar panel at the last tracked point of maximum power? Hint: Follow the green circle.
-finalV = 31.79; % Output Voltage (V) %[control:editfield:9335]{"position":[10,15]}
-exerciseSol5(finalV);
+%[text] ![](text:image:6247) **Exercise 5.** Once the **2-second simulation is complete**, <u>**estimate the settled panel voltage near maximum power**</u> from the green marker. The tracker averages measurements over complete AC cycles and allows the circuit to settle between duty-cycle changes. Compare the marker with the peak of the 1000 W/m^2 curve.
+finalV = 33.60; % Output Voltage (V) %[control:editfield:9335]{"position":[10,15]}
+solarVoltageFeedback = @exerciseSol5;
+solarVoltageFeedback(finalV);
+%%
+%[text] **Further exploration.** To observe changing sunlight, open the model's Solar Irradiance block and set **Time values** to `[0 1 1.1 4]` and **Output values** to `[1000 1000 600 600]`. Set the model stop time to **3 seconds** and run it again. Observe the operating point moving toward the 600 W/m^2 curve. For the graded exercises, restore Time values to `[0 1]`, Output values to `[1000 1000]`, and stop time to **2 seconds**.
 %%
 %[text] ![](text:image:7943) **Note.** The scope block is used to display specific parameters chosen by the user. What if you want to view <u>**all**</u> of the parameters across blocks in a model? The Simulink Data Inspector ![Open Simulation Data Inspector icon.](text:image:8c05) tool allows you to view all of your parameters in one place. Once a simulation is run, a `simlog` variable will appear in the workspace. Click the data inspector icon and select the import data button ![Import Data icon](text:image:458e). Select the import button, and you will be able to view all the signals and parameters in the model.
 %%
@@ -342,33 +344,45 @@ function exerciseSol3(frag)
     end
 end
 
-function exerciseSol4(power)
+function correct = exerciseSol4(power)
     % Provides solution for Exercise 4
     arguments
         power (1,1) double
     end
 
-    if power >= (251.505) && power <= (254.83)
-        disp("Correct! You have properly calculated the maximum power of the solar cell system.")
+    curve = load("solarPanel1LUT.mat","vVec","powerMat");
+    % Column 6 is the 1000 W/m^2 curve at 30 degC.
+    referencePower = interp1(curve.vVec,curve.powerMat(:,6),25);
+    tolerance = 5; % W; allow for reading the curve
+    correct = isreal(power) && isfinite(power) && ...
+        abs(power-referencePower) <= tolerance;
+    if correct
+        disp("Correct! You have estimated the panel power at 25 V.")
     elseif power == 0
         disp("Please enter your answer.")
     else
-        warning("Your answer has exceeded the tolerance of the possible solutions. Please measure the maximum power of the solar cell system again.")
+        warning("Your answer has exceeded the tolerance of the possible solutions. Please read the 1000 W/m^2 curve at 25 V and try again.")
     end
 end
 
-function exerciseSol5(voltage)
+function correct = exerciseSol5(voltage)
     % Provides solution for Exercise 5
     arguments
         voltage  (1,1) double
     end
 
-    if voltage >= (31.79 - 1.5) && voltage <= (31.79 + 1.5)
-        disp("Correct! You have properly determined the output voltage of the solar panel at the final point of maximum power.")
+    curve = load("solarPanel1LUT.mat","vVec","powerMat");
+    [~,peakIndex] = max(curve.powerMat(:,6));
+    referenceVoltage = curve.vVec(peakIndex);
+    tolerance = 1; % V; allow for reading the averaged marker
+    correct = isreal(voltage) && isfinite(voltage) && ...
+        abs(voltage-referenceVoltage) <= tolerance;
+    if correct
+        disp("Correct! You have estimated the settled panel voltage near maximum power.")
     elseif voltage == 0
         disp("Please enter your answer.")
     else
-        warning("Your answer has exceeded the tolerance of the possible solutions. Please measure the output voltage at the final point of maximum power again.")
+        warning("Your answer has exceeded the tolerance of the possible solutions. Please wait for the 2-second simulation to finish, then read the green marker again.")
     end
 end
 
@@ -483,13 +497,13 @@ end
 %   data: {"align":"baseline","height":25,"src":"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAZCAYAAAAmNZ4aAAAA4WlDQ1BzUkdCAAAYlWNgYDzNAARMDgwMuXklRUHuTgoRkVEKDEggMbm4gAE3YGRg+HYNRDIwXNYNLGHlx6MWG+AsAloIpD8AsUg6mM3IAmInQdgSIHZ5SUEJkK0DYicXFIHYQBcz8BSFBDkD2T5AtkI6EjsJiZ2SWpwMZOcA2fEIv+XPZ2Cw+MLAwDwRIZY0jYFhezsDg8QdhJjKQgYG\/lYGhm2XEWKf\/cH+ZRQ7VJJaUQIS8dN3ZChILEoESzODAjQtjYHh03IGBt5IBgbhCwwMXNEQd4ABazEwoEkMJ0IAAHLYNoSjH0ezAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAPnpUWHRTbmlwTWV0YWRhdGEAAAiZq1ZKzsksCMjPzCspVrKKrlaqULIy0FGqBJK1OmCeMVaukSmUD+fG1gIAYj4VcK1SiSYAAAP+SURBVEiJxZZtTFtVHMZ\/LeWt7YCWAe1gYVjBFhguMHUuUyaSZUOTCcNgssSE6ZdFA3FBTTQuy3xJNMvMEs0+TZMlflhG5ic3YhDDMhVUyFaHdCAIrh2lhbZAW+jbuX4RTLktdMbok5zcm3Oec37nufeef64iEAhI\/A9SpWqcWbjLwO+9TM2P4Q3Ox43p1PnsyK9gT1kjxtztKa2n2CyxNzjHleHP8S3PU28+hKmwkmJdaZzH4Z1mwvUr\/bZr5GXn01Lbjk699Z+DRxzDdA99RtOuVurNTQgpTFSsEJPCcb40RQYqZRZKRQb9tqtcvdlNa90xqopr7x982zHE5R8v0HnoFEadgWDERVRa2TCFSpGFOr2QGa+Tc9dO8fyjL1FdXJc62ON3c7bnHU48c5r8XC3+iB0hiQ2hq1IqlGjTS5hf8HP2q5OcOPguem1BauBPvv6AWtMeHjfX4Q2NpQRcL11mBT\/YhhieGODVA2\/JN7i+w+6ZZm7Jxf6qBtzLtwjHluLacw0dDA4My\/rXN\/fyLfZXNTC35MLumd488cX+8zxgLMds0hCMumQTnq7uAmBfw05ef78N7ZaspKnVqkJsEwEmZ8Z5sf74xolt9hFKi4z4QpOEY35ZUyqVKBQKbvT9wtED73H54jcJfeGYH19oktIiIzb7iGxTsgLi8jnZkhPFH1hKnEKtRgiBEBKRsODCx70MXr9D+2tPsKNCfna35kRx+ZwbgwMrfjJVarwrY4RjicEajRYhBJIk\/XUVTI56ePvlL2lur6HxSDlqTfqa37syRiwmPxGyxLGYwB9xEBb+pGBJEmupV+8lSUKTUYAqO0RYhNb8\/ohjc7AmS8tSYJHF8B8JoQBarQYh\/k4rhER5pZFjnQdJy3XiXRmP84djS8SiKSTWawu4514kX5+RNPFqwswsFc++sJude3U4g98RCQRl\/nlPOGEBkYHNJVVM2X9Gk5OWFCxJgsq6YhpbLPiEjXGfNaEXYMoexFyye3Nw0yOHOflFH6ZyjcwcDSkoNOpoaLag3rbIuL+XmBRJCgWwWhc5ffTw5uAyg4lSvQWrdZoKizZ+UAlHOh5mauEnHB73hkCAsVE\/pXoLZQaTbCxhrZ71Oun89DiPPZVNrj5dNikVLXgiDH67zLlXzlOkM8jGZZULoEhnoKO5i74eF7OuEMsRcV9t1hWir8dFR3NXQmjSxKv6\/vYNzlz6iBKLglKz\/J0n0rQtgH1UoqvtDfZW70vq2\/TXx+lxcubSh9yZsbK9QkNeQTqavPjHH\/BF8Lkj3B0L8JCxhq62NzHoEydNGbyqiXu\/ceV6N9aJmzg98bXXoDdQY9pFy5OtmLY9mMpyqYP\/bSX8uP4L\/QlHdCw5EkO+mgAAAABJRU5ErkJggg==","width":30}
 %---
 %[control:editfield:1675]
-%   data: {"defaultValue":"0","label":"Enter Maximum Power Value:","run":"Section","valueType":"MATLAB code"}
+%   data: {"defaultValue":"0","label":"Enter Panel Power at 25 V:","run":"Section","valueType":"MATLAB code"}
 %---
 %[text:image:6247]
 %   data: {"align":"baseline","height":20,"src":"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAADUAAAAxCAYAAAB6d+FmAAAC0ElEQVR42u2aO4gTURSGs6Lugo1WW2ghgiyCr1VWbRSR9YEgKoKohcQmEDAviYhBIaVbbKEWYi22YidoobUItoqwjSui6wt119Wsj+\/onXAcJslMZpI7AxP4Sbh37pnz3TP3zJ2TyWQS9imVStvRK1G5XL5ZqVRWZpL8MUCf0G+lz+hYIoGIyDYPIEc\/i8ViLmkRGkMfWwA5WkD7EwHEutmCs+87ADl6zfHLm4MLhcIqGs7RcV0WoA1xCa3vIkL\/CTsX\/w7G2Bka5oIMjlo4M6GBmOTRABHSeirh3S0LzSYQugHHgAPEJG+l7UOXtr6LgQeqYQZdRVf6Jc5frdfriyKIkOgHQToi1+0XpxGD+ywnhc348a5bICboqLMYmx02784hgRYAOqEzjHWoSIHiABU5kG2osECMP9lqC2IFiqS0qSdAtqAM0Ey3QOhUp81iX6F6DtRvKM6xsedA\/YQKCdQgyx0PcrKeQ4WNkE4K+LhGb6usQOHQOnnOCb31+WdrNW1TQC22BoW9Ddh9i6bRfNDdNkCH1c59LW0vpc8qFDYfo\/tkvMFqtbqM3xdkffgAmseXQ44dM3ba6bcGlc1mh9yzbaK3k\/Y37YAYc9Dl47A+xhoU0dlh7A579I3qRx6lbwAd8PAxHlA4V5BF3ea8Z11Ac62e52IDhb1bZuZL+lFdRWtQpflZzj3exlZsIvVc2b7jdW8xiWSWVL2ng4\/2ofL5\/Ars\/XJdXudN9wC\/R4Ce5PurFH58RN0+FLb2et130D1VVJlCu3zasw9FFC67dwboialUnZadQcBJsg+F09ewd9tkwLFcLrckZOTjkSgi3pmkUClUCpVCpVApVAqVQqVQ0UDp6s5IHKFMeaz5doufYuYz9bf\/XXmXQaqgcZH4I34pqBd+Qluz\/LpBUF3qCEUol3LgwyQAEbFHUrDxW6OTyk7NFEsaMYNpGL9qfoH+AOOEPfJuI6OmAAAAAElFTkSuQmCC","width":22}
 %---
 %[control:editfield:9335]
-%   data: {"defaultValue":"0","label":"Enter Output Voltage Value:","run":"Section","valueType":"MATLAB code"}
+%   data: {"defaultValue":"0","label":"Enter Settled Panel Voltage:","run":"Section","valueType":"MATLAB code"}
 %---
 %[text:image:7943]
 %   data: {"align":"bottom","height":24,"src":"data:image\/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAsCAYAAAAXb\/p7AAADlklEQVR42u1YS0hUYRQejR4UvR+SvaCyWiS2DIoCKWjVYzG2SsYWQ+a8HRwXFkOgqdGLSoSeqyBaJUGLCKGkNpGtgiyScnpYBpaU5au+E+eH03Wu93rvP2OEFw46955z\/u8\/7\/\/3eDQ+4XD4Eui65199AK4d1DEJcBLgfw0wGo2ujkQi1yoqKlY5AFgDqnWw5lpaMxaLrbBkDgaDm7HIEKjTCcjxPqFQqABrdYEGsHaRXaESCAyCXpNFMwwuReDw\/77xusurQGJna0ysPR2K94CnGdQKesnUyu92J5PJaelk4c51Chzcu9dp0O9nkO3yvd\/vnwqlEbzvAf2yoB5sIkwyBt0doJ+0Qbdu2AXyC8UrOVuNQH5Q3IJegfrTfH8ikwC\/A9hjsdaYCQQCG6D4vVj0DShB7+HKXMGaQ\/EFADEGrPhJdn1GAhoZvRDKX4jFTvt8vhlWchSD4D0OGiE5AH9eXl4+PxNF+IoCB8sccyBfreQB8qJWcAC0CYqHeYE2cqEDNTmQvcc6hlC+CnXWq\/PCtTtdeGGr0HNWFz7aeTcr\/eT1eqe41PVWJYxd62zkovwXqQ6Cv8vErm9r8MZNEctLVf9Ph4GwecSOjPSQu8V28e6chmRrFPq28btHJhhSBKDIBH0B726HEDilAWCtsGCx6MmjMNgaHqBkiygPl3UmHE1OrjOEiqoqsqDHGizYxrqGAXCOriL9jJUOoq3lO9UDQItpQGD3PtXZRapFHB51oSchwiWsDWA8Hl8Cpb2svA+WWO4AXJ7Q0Z1IJObq7sUBN\/UQLr0hrHfANSCaQihrobiBf+dC+QOxSNk4MrdEyN1VvRy6T+DdVbOp2wpcCyutN8yDahjtVZ3A4sS2ALwflYxhaK1n0C22QfL8dkuNRYZBlKxxRLj6gg3XNgj+w8beLOriHcv50gocJ8wsfP\/ASgfMDlRs8XzwfGPeThMr2QcpEqFprJmPSoSwSvMYfCcFX6nFlNPEfAGrUuC1GkhxQpspTnTfKysrFxl5qqqqZouy0mU81ZmApB6cp2vKlrFVk+Z7TGRuPOsXRZSNfGYmEO\/ofoXmOiKKS3Ga6wPYeRNxk9Vo49BONAIL1mUdIBa9bxPgn+zMOkAqIXDdQbp1sKAy6uWeyWd0Cyuk5LDh3pTtez\/NSVJqNwbh5kNZB8htkTrP1zHA9dM1nZ07nExmc50ZQGA7M+GxyLden9MA\/OLm\/KKe34xPoKAD7jPkAAAAAElFTkSuQmCC","width":22}
